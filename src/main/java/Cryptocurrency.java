@@ -14,6 +14,8 @@ public class Cryptocurrency implements CryptocurrencyADT{
 
         public Cryptocurrency() {
             // TODO: Delete _Starter. Complete the constructor to instantiate blockchain
+
+
         }
 
         /**

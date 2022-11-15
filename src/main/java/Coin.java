@@ -24,6 +24,7 @@ public class Coin {
     public Coin(Double value, String password){
         this.value = value;
         this.password = password;
+        address = this;
     }
 
     // TODO: Provide limited getters and setters.
@@ -64,7 +65,7 @@ public class Coin {
         //   encoded byes of the memory reference.password - i.e., the instance variable's password.
         //   Set the privateKey and publicKey (last 5 characters of privateKey)
 
-        String str = String.valueOf(hashNode) + "." + password;
+        String str = hashNode.getElement().getAddress() + "." + password;
         byte[] byt = Base64.getEncoder().encode(str.getBytes());
         privateKey = new String(byt, StandardCharsets.UTF_8);
         publicKey = privateKey.substring(privateKey.length() - 5);
