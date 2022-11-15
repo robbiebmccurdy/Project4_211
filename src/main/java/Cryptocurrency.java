@@ -5,6 +5,8 @@
 // In keeping with the UM Honor Code, I have neither given nor received assistance from anyone other
 // than the instructor.
 
+import java.util.Iterator;
+
 public class Cryptocurrency implements CryptocurrencyADT{
         DoubleList<Coin> blockchain;
 
@@ -14,8 +16,9 @@ public class Cryptocurrency implements CryptocurrencyADT{
 
         public Cryptocurrency() {
             // TODO: Delete _Starter. Complete the constructor to instantiate blockchain
-
-
+            blockchain.front = null;
+            blockchain.rear = null;
+            blockchain.count = 0;
         }
 
         /**
@@ -33,8 +36,8 @@ public class Cryptocurrency implements CryptocurrencyADT{
         public void buy(Coin c) {
             // TODO: Complete this method. Call the doubly linked list's add method to add the coin to the blockchain
             //   Then, set the private and public keys of the coin by calling Coin's hashValue method
-
-
+            blockchain.add(c);
+            c.hashValue(blockchain.getFront());
 
         }
 
@@ -46,7 +49,14 @@ public class Cryptocurrency implements CryptocurrencyADT{
         public boolean sell(String key) {
             // TODO: Complete this method. Find the node with the private key - call the double linked list's remove method
 
+            Iterator next = blockchain.iterator();
 
+            while(next.hasNext()){
+                if(next.toString().equals(key)){
+                    blockchain.remove(next.next());
+                    return true;
+                }
+            }
 
 
             return false;

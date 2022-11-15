@@ -25,6 +25,10 @@ public class Coin {
         this.value = value;
         this.password = password;
         address = this;
+
+        if(value < 0){
+            throw new InvalidCryptocurrencyException("Invalid Cryptocurrency");
+        }
     }
 
     // TODO: Provide limited getters and setters.
@@ -33,7 +37,7 @@ public class Coin {
 
     //setters
     public void setValue(Double newVal){
-        if(value <= 0){
+        if(value < 0){
             throw new InvalidCryptocurrencyException("Invalid Cryptocurrency");
         }
         value = newVal;
@@ -65,9 +69,9 @@ public class Coin {
         //   encoded byes of the memory reference.password - i.e., the instance variable's password.
         //   Set the privateKey and publicKey (last 5 characters of privateKey)
 
-        String str = hashNode.getElement().getAddress() + "." + password;
-        byte[] byt = Base64.getEncoder().encode(str.getBytes());
-        privateKey = new String(byt, StandardCharsets.UTF_8);
+        String str = hashNode.toString() + "." + password;
+        byte[] b = Base64.getEncoder().encode(str.getBytes());
+        privateKey = new String(b, StandardCharsets.UTF_8);
         publicKey = privateKey.substring(privateKey.length() - 5);
 
      }
