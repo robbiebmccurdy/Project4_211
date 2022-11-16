@@ -26,7 +26,7 @@ public class Coin {
         this.password = password;
         address = this;
 
-        if(value < 0){
+        if(value < 0){ //checks to see if the value is negative, if it is throw InvalidCryptocurrencyException
             throw new InvalidCryptocurrencyException("Invalid Cryptocurrency");
         }
     }
@@ -37,7 +37,7 @@ public class Coin {
 
     //setters
     public void setValue(Double newVal){
-        if(value < 0){
+        if(value < 0){ //checks to see if the value is negative, if it is throw InvalidCryptocurrencyException
             throw new InvalidCryptocurrencyException("Invalid Cryptocurrency");
         }
         value = newVal;
@@ -68,9 +68,12 @@ public class Coin {
         // TODO: Complete this method. Use the address reference (convert to String) and Base64's static getEncoder().encode(...) to get the
         //   encoded byes of the memory reference.password - i.e., the instance variable's password.
         //   Set the privateKey and publicKey (last 5 characters of privateKey)
-
+        //sets hashNode to a string, adds a "." so we can find the password portion of the string easier in Cryptocurrency.java and then adds the password as well to the string
         String str = hashNode.toString() + "." + password;
+        //converts the bytes of string to a byte array while encoding it in the Base64 encoding method
         byte[] b = Base64.getEncoder().encode(str.getBytes());
+        //Setting our private and public key, private key needs to use the StandardCharsets, while publicKey is the privateKey substringed starting at the last 5 characters of
+        //the privateKey string
         privateKey = new String(b, StandardCharsets.UTF_8);
         publicKey = privateKey.substring(privateKey.length() - 5);
 
